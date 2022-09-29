@@ -6,23 +6,25 @@ import {
   Patch,
   Param,
   Delete,
+  Render,
 } from '@nestjs/common';
 import { ServicosService } from './servicos.service';
 import { CreateServicoDto } from './dto/create-servico.dto';
 import { UpdateServicoDto } from './dto/update-servico.dto';
 
-@Controller('servicos')
+@Controller('admin/servicos')
 export class ServicosController {
   constructor(private readonly servicosService: ServicosService) {}
+
+  @Get()
+  @Render('servicos/cadastrar')
+  exibirCadstrar() {
+    //
+  }
 
   @Post()
   create(@Body() createServicoDto: CreateServicoDto) {
     return this.servicosService.create(createServicoDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.servicosService.findAll();
   }
 
   @Get(':id')
