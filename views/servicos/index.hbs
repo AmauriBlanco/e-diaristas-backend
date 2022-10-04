@@ -1,0 +1,33 @@
+<div class='content-header'>
+  <div class='container-fluid'>
+    <h1>Lista de Serviços</h1>
+  </div>
+</div>
+<div class='content'>
+  <div class='container-fluid'>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th scope='col'>ID</th>
+          <th scope='col'>Nome</th>
+          <th scope='col'>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each servicos}}
+          <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.nome}}</td>
+            <td><a
+                href='/admin/servicos/{{this.id}}/edit'
+                class='btn btn-primary'
+              >Atualizar</a></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <div class='float-left'>
+      <a href='/admin/servicos' class='btn btn-success'>Novo Serviço</a>
+    </div>
+  </div>
+</div>
