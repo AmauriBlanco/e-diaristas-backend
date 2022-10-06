@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+// eslint-disable-next-line prettier/prettier
 import {
   Controller,
   Get,
@@ -38,9 +40,9 @@ export class ServicosController {
   }
 
   @Post()
-  @Redirect('servicos/cadastrar')
+  @Redirect('/admin/servicos/index')
   async cadastrar(@Body() createServicoDto: CreateServicoDto) {
-    await this.servicosRepository.save(createServicoDto);
+    return await this.servicosRepository.save(createServicoDto);
   }
 
   @Get(':id/edit')
@@ -50,9 +52,13 @@ export class ServicosController {
     return { servico: servico };
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateServicoDto: UpdateServicoDto) {
-    return this.servicosService.update(+id, updateServicoDto);
+  @Patch(':id/edit')
+  @Redirect('/admin/servicos/index')
+  async update(
+    @Param('id') id: string,
+    @Body() updateServicoDto: UpdateServicoDto,
+  ) {
+    return await this.servicosRepository.update(id, updateServicoDto);
   }
 
   @Delete(':id')
