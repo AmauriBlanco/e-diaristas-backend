@@ -6,12 +6,22 @@
   </div>
   <div class='content'>
     <div class='container-fluid'>
-      <form action='/admin/servicos/{{servico.id}}/edit?_method=PATCH' method='post'>
+      <form
+        action='/admin/servicos/{{servico.id}}/edit?_method=PATCH'
+        method='post'
+      >
         <div class='card'>
           <div class='card-body'>
             <fieldset>
               <legend>Identificação</legend>
               <div class='row'>
+                <div class='col-lg-12'>
+                  <div class='col-lg-3'>
+                    <div class='{{alert}}'>
+                      <p>{{{message}}}</p>
+                    </div>
+                  </div>
+                </div>
                 <div class='col-md-4'>
                   <div class='form-group'>
                     <label for='nome'>Nome</label>
@@ -19,7 +29,7 @@
                       type='text'
                       name='nome'
                       class='form-control'
-                      value='{{servico.nome}}'
+                      value='{{#if message}}{{oldData.0.nome}}{{^}}{{servico.nome}}{{/if}}'
                       placeholder='Nome do serviço'
                     />
                   </div>
@@ -28,7 +38,8 @@
                   <div class='form-group'>
                     <label for='icone'>Ícone</label>
                     <select name='icone' id='icone' class='form-control'>
-                      <option value='{{servico.icone}}'>{{servico.nome}}
+                      <option value='{{#if message}}{{oldData.0.icone}}{{^}}{{servico.icone}}{{/if}}'>
+                      {{#if message}}{{oldData.0.icone}}{{^}}{{servico.icone}}{{/if}}
                       </option>
                       <option value='twf-cleaning-1'>Ícone 1</option>
                       <option value='twf-cleaning-2'>Ícone 2</option>
@@ -43,8 +54,10 @@
                       type='text'
                       name='posicao'
                       class='form-control'
-                      value='{{servico.posicao}}'
+                      value='{{#if message}}{{oldData.0.posicao}}{{^}}{{servico.posicao}}{{/if}}'
                       placeholder='Posição do serviço na plataforma'
+                      data-mask="00"
+                          required
                     />
                   </div>
                 </div>
@@ -60,8 +73,11 @@
                       type='text'
                       name='valorMinimo'
                       class='form-control'
-                      value='{{servico.valorMonimo}}'
+                      value='{{#if message}}{{oldData.0.valorMinimo}}{{^}}{{servico.valorMonimo}}{{/if}}'
                       placeholder='Valor mínimo do serviço'
+                      data-mask="#.##0,00"
+                          data-mask-reverse="true"
+                          required
                     />
                   </div>
                 </div>
@@ -72,8 +88,10 @@
                       type='number'
                       name='quantidadeHoras'
                       class='form-control'
-                      value='{{servico.quantidadeHoras}}'
+                      value='{{#if message}}{{oldData.0.quantidadeHoras}}{{^}}{{servico.quantidadeHoras}}{{/if}}'
                       placeholder='Quantidade mínima de horas'
+                      data-mask="0"
+                          required
                     />
                   </div>
                 </div>
@@ -84,8 +102,10 @@
                       type='text'
                       name='porcentagem'
                       class='form-control'
-                      value='{{servico.porcentagem}}'
+                      value='{{#if message}}{{oldData.0.porcentagem}}{{^}}{{servico.porcentagem}}{{/if}}'
                       placeholder='Porcentagem da comissão'
+                      data-mask="000"
+                          required
                     />
                   </div>
                 </div>
@@ -101,8 +121,11 @@
                       type='number'
                       name='valorQuarto'
                       class='form-control'
-                      value='{{servico.valorQuarto}}'
+                      value='{{#if message}}{{oldData.0.valorQuarto}}{{^}}{{servico.valorQuarto}}{{/if}}'
                       placeholder='Valor por quarto'
+                      data-mask="#.##0,00"
+                          data-mask-reverse="true"
+                          required
                     />
                   </div>
                 </div>
@@ -113,8 +136,10 @@
                       type='number'
                       name='horasQuarto'
                       class='form-control'
-                      value='{{servico.horasQuarto}}'
+                      value='{{#if message}}{{oldData.0.horasQuarto}}{{^}}{{servico.horasQuarto}}{{/if}}'
                       placeholder='Quantidade de horas por quarto'
+                      data-mask="0"
+                          required
                     />
                   </div>
                 </div>
@@ -127,8 +152,11 @@
                       type='number'
                       name='valorSala'
                       class='form-control'
-                      value='{{servico.valorSala}}'
-                      placeholder='Quantidade Valor por sala'
+                      value='{{#if message}}{{oldData.0.valorSala}}{{^}}{{servico.valorSala}}{{/if}} '
+                     placeholder='Quantidade Valor por sala'
+                     data-mask="#.##0,00"
+                          data-mask-reverse="true"
+                          required
                     />
                   </div>
                 </div>
@@ -139,8 +167,10 @@
                       type='number'
                       name='horasSala'
                       class='form-control'
-                      value='{{servico.horasSala}}'
-                      placeholder='Quantidade de horas por sala'
+                      value='{{#if message}}{{oldData.0.horasSala}}{{^}}{{servico.horasSala}}{{/if}} '
+                     placeholder='Quantidade de horas por sala'
+                     data-mask="0"
+                          required
                     />
                   </div>
                 </div>
@@ -153,8 +183,11 @@
                       type='number'
                       name='valorBanheiro'
                       class='form-control'
-                      value='{{servico.valorBanheiro}}'
+                      value='{{#if message}}{{oldData.0.valorBanheiro}}{{^}}{{servico.valorBanheiro}}{{/if}}'
                       placeholder='Quantidade Valor por banheiro'
+                      data-mask="#.##0,00"
+                          data-mask-reverse="true"
+                          required
                     />
                   </div>
                 </div>
@@ -165,8 +198,10 @@
                       type='number'
                       name='horasBanheiro'
                       class='form-control'
-                      value='{{servico.horasBanheiro}}'
+                      value='{{#if message}}{{oldData.0.horasBanheiro}}{{^}}{{servico.horasBanheiro}}{{/if}}'
                       placeholder='Quantidade de horas por banheiro'
+                      data-mask="0"
+                          required
                     />
                   </div>
                 </div>
@@ -179,8 +214,11 @@
                       type='number'
                       name='valorCozinha'
                       class='form-control'
-                      value='{{servico.valorCozinha}}'
+                      value='{{#if message}}{{oldData.0.valorCozinha}}{{^}}{{servico.valorCozinha}}{{/if}}'
                       placeholder='Quantidade Valor por cozinha'
+                      data-mask="#.##0,00"
+                          data-mask-reverse="true"
+                          required
                     />
                   </div>
                 </div>
@@ -191,8 +229,10 @@
                       type='number'
                       name='horasCozinha'
                       class='form-control'
-                      value='{{servico.horasCozinha}}'
+                      value='{{#if message}}{{oldData.0.horasCozinha}}{{^}}{{servico.horasCozinha}}{{/if}}'
                       placeholder='Quantidade de horas por cozinha'
+                      data-mask="0"
+                          required
                     />
                   </div>
                 </div>
@@ -205,8 +245,11 @@
                       type='number'
                       name='valorQuintal'
                       class='form-control'
-                      value='{{servico.valorQuintal}}'
+                      value='{{#if message}}{{oldData.0.valorQuintal}}{{^}}{{servico.valorQuintal}}{{/if}}'
                       placeholder='Quantidade Valor por quintal'
+                      data-mask="#.##0,00"
+                          data-mask-reverse="true"
+                          required
                     />
                   </div>
                 </div>
@@ -217,8 +260,10 @@
                       type='number'
                       name='horasQuintal'
                       class='form-control'
-                      value='{{servico.horasQuintal}}'
+                      value='{{#if message}}{{oldData.0.horasQuintal}}{{^}}{{servico.horasQuintal}}{{/if}}'
                       placeholder='Quantidade de horas por quintal'
+                      data-mask="0"
+                          required
                     />
                   </div>
                 </div>
@@ -231,8 +276,11 @@
                       type='number'
                       name='valorOutros'
                       class='form-control'
-                      value='{{servico.valorOutros}}'
+                      value='{{#if message}}{{oldData.0.valorOutros}}{{^}}{{servico.valorOutros}}{{/if}}'
                       placeholder='Quantidade Valor por outros tipos de cômodos'
+                      data-mask="#.##0,00"
+                          data-mask-reverse="true"
+                          required
                     />
                   </div>
                 </div>
@@ -244,8 +292,10 @@
                       type='number'
                       name='horasOutros'
                       class='form-control'
-                      value='{{servico.horasOutros}}'
+                      value='{{#if message}}{{oldData.0.horasOutros}}{{^}}{{servico.horasOutros}}{{/if}}'
                       placeholder='Quantidade de horas por outros tipos de cômodos'
+                      data-mask="0"
+                          required
                     />
                   </div>
                 </div>

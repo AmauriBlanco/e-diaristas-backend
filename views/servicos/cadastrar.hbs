@@ -28,8 +28,12 @@
                 <fieldset>
                   <legend>Identificação</legend>
                   <div class='row'>
-                    <div class="col-lg-12">
-                      <p style="color: red;">{{message}}</p>
+                    <div class='col-lg-12'>
+                      <div class='col-lg-3'>
+                        <div class='{{alert}}'>
+                          <p>{{{message}}}</p>
+                        </div>
+                      </div>
                     </div>
                     <div class='col-md-4'>
                       <div class='form-group'>
@@ -38,8 +42,9 @@
                           type='text'
                           name='nome'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.nome}}'
                           placeholder='Nome do serviço'
+                          required
                         />
                       </div>
                     </div>
@@ -47,7 +52,8 @@
                       <div class='form-group'>
                         <label for='icone'>Ícone</label>
                         <select name='icone' id='icone' class='form-control'>
-                          <option value=''>Selecione o ícone do servico:
+                          <option value='{{#if message}}{{oldData.0.icone}}{{^}}Selecione o Icone{{/if}}'>
+                          {{#if message}}{{oldData.0.icone}}{{^}}Selecione o Icone{{/if}}
                           </option>
                           <option value='twf-cleaning-1'>Ícone 1</option>
                           <option value='twf-cleaning-2'>Ícone 2</option>
@@ -62,7 +68,7 @@
                           type='text'
                           name='posicao'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.posicao}}'
                           placeholder='Posição do serviço na plataforma'
                         />
                       </div>
@@ -79,8 +85,11 @@
                           type='text'
                           name='valorMinimo'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.valorMinimo}}'
                           placeholder='Valor mínimo do serviço'
+                          data-mask="#.##0,00"
+                          data-mask-reverse="true"
+                          required
                         />
                       </div>
                     </div>
@@ -91,8 +100,10 @@
                           type='number'
                           name='quantidadeHoras'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.quantidadeHoras}}'
                           placeholder='Quantidade mínima de horas'
+                          data-mask="0"
+                          required
                         />
                       </div>
                     </div>
@@ -103,8 +114,10 @@
                           type='text'
                           name='porcentagem'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.porcentagem}}'
                           placeholder='Porcentagem da comissão'
+                          data-mask="000"
+                          required
                         />
                       </div>
                     </div>
@@ -120,8 +133,11 @@
                           type='text'
                           name='valorQuarto'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.valorQuarto}}'
                           placeholder='Valor por quarto'
+                          data-mask="#.##0,00"
+                          data-mask-reverse="true"
+                          required
                         />
                       </div>
                     </div>
@@ -132,8 +148,10 @@
                           type='number'
                           name='horasQuarto'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.horasQuarto}}'
                           placeholder='Quantidade de horas por quarto'
+                          data-mask="0"
+                          required
                         />
                       </div>
                     </div>
@@ -146,8 +164,11 @@
                           type='text'
                           name='valorSala'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.valorSala}}'
                           placeholder='Quantidade Valor por sala'
+                          data-mask="#.##0,00"
+                          data-mask-reverse="true"
+                          required
                         />
                       </div>
                     </div>
@@ -158,8 +179,10 @@
                           type='number'
                           name='horasSala'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.horasSala}}'
                           placeholder='Quantidade de horas por sala'
+                          data-mask="0"
+                          required
                         />
                       </div>
                     </div>
@@ -172,8 +195,11 @@
                           type='text'
                           name='valorBanheiro'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.valorBanheiro}}'
                           placeholder='Quantidade Valor por banheiro'
+                          data-mask="#.##0,00"
+                          data-mask-reverse="true"
+                          required
                         />
                       </div>
                     </div>
@@ -185,8 +211,10 @@
                           type='number'
                           name='horasBanheiro'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.horasBanheiro}}'
                           placeholder='Quantidade de horas por banheiro'
+                          data-mask="0"
+                          required
                         />
                       </div>
                     </div>
@@ -199,8 +227,11 @@
                           type='text'
                           name='valorCozinha'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.valorCozinha}}'
                           placeholder='Quantidade Valor por cozinha'
+                          data-mask="#.##0,00"
+                          data-mask-reverse="true"
+                          required
                         />
                       </div>
                     </div>
@@ -212,8 +243,10 @@
                           type='number'
                           name='horasCozinha'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.horasCozinha}}'
                           placeholder='Quantidade de horas por cozinha'
+                          data-mask="0"
+                          required
                         />
                       </div>
                     </div>
@@ -226,8 +259,11 @@
                           type='text'
                           name='valorQuintal'
                           class='form-control'
-                          value=''
+                          {{oldData.0.valorQuintal}}
                           placeholder='Quantidade Valor por quintal'
+                          data-mask="#.##0,00"
+                          data-mask-reverse="true"
+                          required
                         />
                       </div>
                     </div>
@@ -239,8 +275,10 @@
                           type='number'
                           name='horasQuintal'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.horasQuintal}}'
                           placeholder='Quantidade de horas por quintal'
+                          data-mask="0"
+                          required
                         />
                       </div>
                     </div>
@@ -254,8 +292,11 @@
                           type='text'
                           name='valorOutros'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.valorOutros}}'
                           placeholder='Quantidade Valor por outros tipos de cômodos'
+                          data-mask="#.##0,00"
+                          data-mask-reverse="true"
+                          required
                         />
                       </div>
                     </div>
@@ -267,8 +308,10 @@
                           type='number'
                           name='horasOutros'
                           class='form-control'
-                          value=''
+                          value='{{oldData.0.horasOutros}}'
                           placeholder='Quantidade de horas por outros tipos de cômodos'
+                          data-mask="0"
+                          required
                         />
                       </div>
                     </div>

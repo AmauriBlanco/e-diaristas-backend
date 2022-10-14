@@ -21,97 +21,53 @@ import { Servico } from './entities/servico.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Utils } from 'src/utils/utils';
 import { CreateException } from 'src/common/filters/create-exceptions.filter';
+import { PatchException } from 'src/common/filters/patch-exceptions.filter';
 
 @Controller('admin/servicos')
 export class ServicosController {
-  constructor(
-    private readonly servicosService: ServicosService,
-    private readonly utils: Utils,
-    @InjectRepository(Servico)
-    private readonly servicosRepository: Repository<Servico>,
-  ) {}
+  constructor(private readonly servicosService: ServicosService) {}
 
   @Get('create')
   @Render('servicos/cadastrar')
   exibirCadstrar(@Request() req) {
-    return { message: req.flash('message'), oldData: req.flash('oldData') };
+    return {
+      message: req.flash('message'),
+      oldData: req.flash('oldData'),
+      alert: req.flash('alert'),
+    };
   }
 
   @Get('index')
   @Render('servicos/index')
   async listarServicos() {
-    const servicos = await this.servicosRepository.find();
-    return { servicos: servicos };
+    return { servicos: await this.servicosService.findAll() };
   }
 
   @Post()
   @UseFilters(CreateException)
   @Redirect('/admin/servicos/index')
   async cadastrar(@Body() createServicoDto: CreateServicoDto) {
-    createServicoDto.valorBanheiro = this.utils.formatDecimal(
-      createServicoDto.valorBanheiro,
-    );
-    createServicoDto.valorCozinha = this.utils.formatDecimal(
-      createServicoDto.valorCozinha,
-    );
-    createServicoDto.valorOutros = this.utils.formatDecimal(
-      createServicoDto.valorOutros,
-    );
-    createServicoDto.valorMinimo = this.utils.formatDecimal(
-      createServicoDto.valorMinimo,
-    );
-    createServicoDto.valorQuarto = this.utils.formatDecimal(
-      createServicoDto.valorQuarto,
-    );
-    createServicoDto.valorQuintal = this.utils.formatDecimal(
-      createServicoDto.valorQuintal,
-    );
-    createServicoDto.valorSala = this.utils.formatDecimal(
-      createServicoDto.valorSala,
-    );
-
-    return await this.servicosRepository.save(createServicoDto);
+    return await this.servicosService.create(createServicoDto);
   }
 
   @Get(':id/edit')
   @Render('servicos/editar')
-  async atualizarServico(@Param('id') id: number) {
-    const servico = await this.servicosRepository.findOneBy({ id: id });
-    return { servico: servico };
+  async atualizarServico(@Param('id') id: number, @Request() req) {
+    return {
+      servico: await this.servicosService.findOne(id),
+      message: req.flash('message'),
+      oldData: req.flash('oldData'),
+      alert: req.flash('alert'),
+    };
   }
 
   @Patch(':id/edit')
+  @UseFilters(PatchException)
   @Redirect('/admin/servicos/index')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateServicoDto: UpdateServicoDto,
   ) {
-    updateServicoDto.valorBanheiro = this.utils.formatDecimal(
-      updateServicoDto.valorBanheiro,
-    );
-    updateServicoDto.valorCozinha = this.utils.formatDecimal(
-      updateServicoDto.valorCozinha,
-    );
-    updateServicoDto.valorOutros = this.utils.formatDecimal(
-      updateServicoDto.valorOutros,
-    );
-    updateServicoDto.valorMinimo = this.utils.formatDecimal(
-      updateServicoDto.valorMinimo,
-    );
-    updateServicoDto.valorQuarto = this.utils.formatDecimal(
-      updateServicoDto.valorQuarto,
-    );
-    updateServicoDto.valorQuintal = this.utils.formatDecimal(
-      updateServicoDto.valorQuintal,
-    );
-    updateServicoDto.valorSala = this.utils.formatDecimal(
-      updateServicoDto.valorSala,
-    );
-    return await this.servicosRepository.update(id, updateServicoDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.servicosService.remove(+id);
+    return await this.servicosService.update(id, updateServicoDto);
   }
 }
