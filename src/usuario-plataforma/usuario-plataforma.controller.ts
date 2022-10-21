@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Render,
+  Redirect,
 } from '@nestjs/common';
 import { UsuarioPlataformaService } from './usuario-plataforma.service';
 import { CreateUsuarioPlataformaDto } from './dto/create-usuario-plataforma.dto';
@@ -24,7 +25,14 @@ export class UsuarioPlataformaController {
     return { nome: 'Amauri', email: 'amauri@treinaweb.com', id: '1' };
   }
 
+  @Get('create')
+  @Render('usuarios/cadastrar')
+  async exibirCadastrarUsuario() {
+    // return { nome: 'Amauri', email: 'amauri@treinaweb.com', id: '1' };
+  }
+
   @Post()
+  @Redirect('/admin/usuarios/index')
   create(@Body() createUsuarioPlataformaDto: CreateUsuarioPlataformaDto) {
     return this.usuarioPlataformaService.create(createUsuarioPlataformaDto);
   }
