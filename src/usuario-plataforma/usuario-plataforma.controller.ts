@@ -8,10 +8,13 @@ import {
   Delete,
   Render,
   Redirect,
+  UseFilters,
+  Request,
 } from '@nestjs/common';
 import { UsuarioPlataformaService } from './usuario-plataforma.service';
 import { CreateUsuarioPlataformaDto } from './dto/create-usuario-plataforma.dto';
 import { UpdateUsuarioPlataformaDto } from './dto/update-usuario-plataforma.dto';
+import { CreateException } from 'src/common/filters/create-exceptions.filter';
 
 @Controller('admin/usuarios')
 export class UsuarioPlataformaController {
@@ -27,11 +30,16 @@ export class UsuarioPlataformaController {
 
   @Get('create')
   @Render('usuarios/cadastrar')
-  async exibirCadastrarUsuario() {
-    // return { nome: 'Amauri', email: 'amauri@treinaweb.com', id: '1' };
+  async exibirCadastrarUsuario(@Request() req) {
+    return {
+      message: req.flash('message'),
+      oldData: req.flash('oldData'),
+      alert: req.flash('alert'),
+    };
   }
 
   @Post()
+  @UseFilters(CreateException)
   @Redirect('/admin/usuarios/index')
   create(@Body() createUsuarioPlataformaDto: CreateUsuarioPlataformaDto) {
     return this.usuarioPlataformaService.create(createUsuarioPlataformaDto);

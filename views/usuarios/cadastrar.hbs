@@ -12,7 +12,7 @@
             <fieldset>
               <div class='row'>
                 <div class='col-lg-12'>
-                  <div class='col-lg-3'>
+                  <div class='col-lg-4'>
                     <div class='{{alert}}'>
                       <p>{{{message}}}</p>
                     </div>
@@ -35,11 +35,12 @@
                   <div class='form-group'>
                     <label for='email'>Email</label>
                     <input
-                      type='text'
+                      type='email'
                       name='email'
                       class='form-control'
                       value='{{oldData.0.email}}'
                       placeholder='Email do usuário'
+                      required
                     />
                   </div>
                 </div>
@@ -52,6 +53,7 @@
                       class='form-control'
                       value=''
                       placeholder='Senha do usuário'
+                      required
                     />
                   </div>
                 </div>
@@ -64,6 +66,7 @@
                       class='form-control'
                       value=''
                       placeholder='Confirme a senha'
+                      required
                     />
                   </div>
                 </div>
