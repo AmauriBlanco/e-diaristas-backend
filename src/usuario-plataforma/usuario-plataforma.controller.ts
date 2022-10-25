@@ -55,13 +55,20 @@ export class UsuarioPlataformaController {
     return this.usuarioPlataformaService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
+  @Get(':id/edit')
+  @Render('usuarios/edit')
+  editarUsuario(@Param('id') id: number) {
+    //;
+  }
+
+  @Patch(':id/edit')
+  @Redirect('/admin/usuarios/index')
+  async update(
+    @Param('id') id: number,
     @Body() updateUsuarioPlataformaDto: UpdateUsuarioPlataformaDto,
   ) {
-    return this.usuarioPlataformaService.update(
-      +id,
+    return await this.usuarioPlataformaService.update(
+      id,
       updateUsuarioPlataformaDto,
     );
   }
