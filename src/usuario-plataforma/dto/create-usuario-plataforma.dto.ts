@@ -3,7 +3,7 @@ import { IsEmail, IsNotEmpty, Length } from 'class-validator';
 export class CreateUsuarioPlataformaDto {
   @IsNotEmpty({ message: 'Campo nome não pode ser vazio' })
   @Length(3, 255, { message: 'Campo nome deve ter de 3 ate 255 caracteres' })
-  nome: string;
+  name: string;
 
   @IsNotEmpty({ message: 'Campo email não pode ser vazio' })
   @Length(3, 255, { message: 'Campo email deve ter de 3 ate 255 caracteres' })
