@@ -15,25 +15,23 @@
         </tr>
       </thead>
       <tbody>
-        {{!-- {{#each usuario}} --}}
-        <tr>
-          <td>{{id}}</td>
-          <td>{{nome}}</td>
-          <td>{{email}}</td>
-          <td>
-            <a
-              href='/admin/servicos/{{this.id}}/edit'
-              class='btn btn-primary'
-            >Atualizar</a>
-          </td>
-          <td>
-            <a
-              href='/admin/servicos/{{this.id}}/edit'
-              class='btn btn-danger'
-            >Excluir</a>
-          </td>
-        </tr>
-        {{!-- {{/each}} --}}
+        {{#each usuarios}}
+          <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.nome}}</td>
+            <td>{{this.email}}</td>
+            <td>
+              <a
+                href='/admin/servicos/{{this.id}}/edit'
+                class='btn btn-primary'
+              >Atualizar</a>
+              <a
+                href='/admin/servicos/{{this.id}}/edit'
+                class='btn btn-danger'
+              >Excluir</a>
+            </td>
+          </tr>
+        {{/each}}
       </tbody>
     </table>
     <div class='float-left'>

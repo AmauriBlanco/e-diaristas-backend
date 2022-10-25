@@ -22,7 +22,7 @@ export class UsuarioPlataformaController {
   @Get('index')
   @Render('usuarios/index')
   async listarUsuarios() {
-    return { nome: 'Amauri', email: 'amauri@treinaweb.com', id: '1' };
+    return { usuarios: await this.usuarioPlataformaService.findAll() };
   }
 
   @Get('create')
