@@ -82,7 +82,8 @@ export class UsuarioPlataformaController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usuarioPlataformaService.remove(+id);
+  @Redirect('/admin/usuarios/index')
+  remove(@Param('id') id: number) {
+    return this.usuarioPlataformaService.remove(id);
   }
 }
