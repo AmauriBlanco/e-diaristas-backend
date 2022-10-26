@@ -46,6 +46,14 @@ export class UsuarioPlataformaService {
     return user;
   }
 
+  async findOneByEmail(email: string) {
+    const user = await this.usuarioRepository.findOneBy({ email: email });
+    if (!user) {
+      throw new NotFoundException();
+    }
+    return user;
+  }
+
   async update(
     id: number,
     updateUsuarioPlataformaDto: UpdateUsuarioPlataformaDto,
