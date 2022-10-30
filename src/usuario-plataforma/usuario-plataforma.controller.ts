@@ -10,12 +10,14 @@ import {
   Redirect,
   UseFilters,
   Request,
+  UseGuards,
 } from '@nestjs/common';
 import { UsuarioPlataformaService } from './usuario-plataforma.service';
 import { CreateUsuarioPlataformaDto } from './dto/create-usuario-plataforma.dto';
 import { UpdateUsuarioPlataformaDto } from './dto/update-usuario-plataforma.dto';
 import { CreateException } from 'src/common/filters/create-exceptions.filter';
 import { PatchException } from 'src/common/filters/patch-exceptions.filter';
+import { AuthenticatedGuard } from 'src/common/guards/authenticated.guard';
 
 @Controller('admin/usuarios')
 export class UsuarioPlataformaController {
@@ -23,6 +25,7 @@ export class UsuarioPlataformaController {
     private readonly usuarioPlataformaService: UsuarioPlataformaService,
   ) {}
 
+  @UseGuards(AuthenticatedGuard)
   @Get('index')
   @Render('usuarios/index')
   async listarUsuarios() {
