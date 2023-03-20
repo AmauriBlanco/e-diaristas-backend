@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import {
   ArgumentsHost,
   BadRequestException,
@@ -10,7 +9,7 @@ import { Response } from 'express';
 import { Utils } from 'src/utils/utils';
 
 @Catch(HttpException)
-export class PatchException implements ExceptionFilter {
+export class CreateException implements ExceptionFilter {
   constructor(private utils: Utils) {}
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
@@ -22,11 +21,11 @@ export class PatchException implements ExceptionFilter {
     if (exception instanceof BadRequestException) {
       request.flash(
         'message',
-        this.utils.formatExceptions(exception['response']['message']),
+        this.utils.formatException(exception['response']['message']),
       );
       request.flash('alert', 'alert alert-danger');
       request.flash('oldData', oldData);
-      response.redirect(`${url}/edit`);
+      response.redirect(`${url}/create`);
     } else {
       response.redirect(`${url}/index`);
     }

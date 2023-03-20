@@ -1,0 +1,59 @@
+<div class="content-header">
+  <div class="container-fluid">
+    <h1>Lista de Diárias</h1>
+  </div>
+  <div class="card-tools float-right mr-2">
+    <form method="GET" class="form-inline">
+      
+      <label for="cliente" class="sr-only">Nome do cliente</label>
+      <input type="tex" name="cliente" class="form-control mb-2 mr-sm-2" placeholder="Buscar por cliente" value="{{#getParamCliente 'cliente'}}{{/getParamCliente}}">
+      
+      <label for="status" class="sr-only">Status</label>
+      <select name="status" class="form-control mb-2 mr-sm-2">
+        <option value="">Todas</option>
+        <option value="123" {{#getParamStatus 'status' '123'}}{{/getParamStatus}}>Pendentes</option>
+        <option value="5" {{#getParamStatus 'status' '5'}}{{/getParamStatus}}>Canceladas</option>
+        <option value="467" {{#getParamStatus 'status' '467'}}{{/getParamStatus}}>Concluídas</option>
+      </select>
+
+      <button type="submit" class="btn btn-primary mb-2">Filtrar</button>
+      <a href="/admin/diarias/index" class="btn btn-default mb-2 ml-2">Limpar</a>
+    </form>
+  </div>
+</div>
+<div class="content">
+  <div class="container-fluid">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Status</th>
+          <th scope="col">Nome Cliente</th>
+          <th scope="col">Nome Diarista</th>
+          <th scope="col">Data Atendimento</th>
+          <th scope="col">Preço</th>
+          <th scope="col">Chave Pix</th>
+          <th scope="col">Comissão</th>
+          <th scope="col">Tranferência</th>
+          <th scope="col">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each diarias}}
+        <tr>
+          <th>{{this.id}}</th>
+          <td>{{#exibirStatus this.status}}{{/exibirStatus}}</td>
+          <td>{{this.cliente.nomeCompleto}}</td>
+          <td>{{this.diarista.nomeCompleto}}</td>
+          <td>{{#converterData this.dataAtendimento}}{{/converterData}}</td>
+          <td>{{#converterReal this.preco}}{{/converterReal}}</td>
+          <td>{{this.diarista.chavePix}}</td>
+          <td>{{#converterReal this.valorComissao}}{{/converterReal}}</td>
+          <td>{{#calcularTransferencia this.preco this.valorComissao}}{{/calcularTransferencia}}</td>
+          <td><a {{#validarPagamento this.status this.id}}{{/validarPagamento}} onclick="alert('Confirma a alteração do status da diária para Transferido?')">Marcar como transferido</a></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

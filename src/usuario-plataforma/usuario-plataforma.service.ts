@@ -20,6 +20,7 @@ export class UsuarioPlataformaService {
     const user = await this.usuarioRepository.findOneBy({
       email: createUsuarioPlataformaDto.email,
     });
+
     if (
       createUsuarioPlataformaDto.password !==
       createUsuarioPlataformaDto.passwordConfirmation
@@ -31,7 +32,8 @@ export class UsuarioPlataformaService {
       );
       return this.usuarioRepository.save(createUsuarioPlataformaDto);
     }
-    throw new BadRequestException('Email ja cadastrado');
+
+    throw new BadRequestException('Email já cadastrado');
   }
 
   async findAll() {
@@ -62,13 +64,14 @@ export class UsuarioPlataformaService {
     const userEmail = await this.usuarioRepository.findOneBy({
       email: updateUsuarioPlataformaDto.email,
     });
+
     if (
       updateUsuarioPlataformaDto.password !==
       updateUsuarioPlataformaDto.passwordConfirmation
     ) {
       throw new BadRequestException('Senha não confere');
     } else if (!userEmail || userEmail.email === user.email) {
-      user.name = updateUsuarioPlataformaDto.name;
+      user.nome = updateUsuarioPlataformaDto.nome;
       user.email = updateUsuarioPlataformaDto.email;
       user.password = await this.setPassword(
         updateUsuarioPlataformaDto.password,
@@ -82,6 +85,7 @@ export class UsuarioPlataformaService {
 
   async remove(id: number) {
     const result = await this.usuarioRepository.delete(id);
+
     if (result.affected === 0) {
       throw new NotFoundException('Nenhum ID encontrado');
     }

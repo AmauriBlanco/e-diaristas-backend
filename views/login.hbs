@@ -1,95 +1,64 @@
-<html lang='pt-BR'>
-  <head>
-    <meta charset='utf-8' />
-    <meta name='viewport' content='width=device-width, initial-scale=1' />
-    <title>Ediaristas Admin</title>
+<!DOCTYPE html>
+<html lang="pt-br">
 
-    <!-- Google Font: Source Sans Pro -->
-    <link
-      rel='stylesheet'
-      href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback'
-    />
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ediaristas - Admin</title>
+  <meta name='csrf-token' content='#' />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/css/adminlte.min.css">
+</head>
 
-    <!-- Font Awesome Icons -->
-    <link rel='stylesheet' href='/fontawesome-free/css/all.min.css' />
-
-    <!-- Theme style -->
-    <link rel='stylesheet' href='/css/adminlte.min.css' />
-  </head>
-  <body class='login-page'>
-    <div class='login-box'>
-      <div class='login-logo'>
-        <a href='#'>
-          <img src='/img/logo-icon.svg' alt='' height='50' />
-        </a>
-        <b>Administração</b>
-      </div>
+<body class="login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="#"><img src="/img/logo.png" alt="" height="50"></a>
+      <b>Administração</b>
     </div>
-    <div class='card card-outline card-primary'>
-      <div class='card-header'>
-        <h3 class='card-title float-none text-center'>
-          Entre para iniciar uma nova sessão
-        </h3>
-      </div>
-      <div class='card-body login-card-body'>
-
-        <form action='/admin/login' method='post'>
-          <div class='input-group mb-3'>
-            <input
-              type='email'
-              class='form-control {{class}}'
-              name='username'
-              value=''
-              placeholder='Email'
-            />
-            <div class='input-group-append'>
-              <div class='input-group-text'>
-                <span class='fas fa-envelope'></span>
-              </div>
-            </div>
-          </div>
-
-          <div class='input-group mb-3'>
-            <input
-              type='password'
-              class='form-control {{class}}'
-              name='password'
-              value=''
-              placeholder='Senha'
-            />
-            <div class='input-group-append'>
-              <div class='input-group-text'>
-                <span class='fas fa-lock'></span>
-              </div>
-            </div>
-          </div>
-          <div class='row'>
-            <div class='col-12'>
-              <div class='text-center text-danger'><strong
-                >{{loginError}}</strong></div>
-              <button class='btn btn-block btn-flat btn-primary' type='submit'>
-                <span class='fas fa-sign-in-alt'> Entrar</span>
-              </button>
-              <div class='mt-1 text-center'>
-                <span><a href='#'>Esqueci a senha</a></span>
-              </div>
-            </div>
-          </div>
-        </form>
-
-      </div>
+  </div>
+  <div class="card card-outline card-primary">
+    <div class="card-header">
+      <h3 class="card-title float-none text-center">Entre para iniciar uma nova sessão</h3>
     </div>
-
-    <!-- REQUIRED SCRIPTS -->
-
-    <script src='/js/jquery/jquery.min.js'></script>
-
-    <script src='/js/bootstrap/js/bootstrap.bundle.min.js'></script>
-
-    <script src='/js/adminlte/adminlte.min.js'></script>
-    <script
-      src='https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js'
-    ></script>
-  </body>
-
+    <div class="card-body login-card-body">
+      <form action="/admin/login" method="post">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+        <div class="input-group mb-3">
+          <input type="email" class="form-control {{class}}" name="username" value="" placeholder="Email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control {{class}}" name="password" value="" placeholder="Senha">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center text-danger"><strong>{{loginError}}</strong></div>
+            <button class="bt btn-block btn-flat btn-primary" type="submit">
+              <span class="fas fa-sign-in-alt"></span> Entrar
+            </button>
+            <div class="mt-1 text-center">
+              <span><a href="password-reset">Esqueci a senha</a></span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="/js/jquery/jquery.min.js"></script>
+  <script src="/js/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/adminlte/adminlte.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+</body>
 </html>

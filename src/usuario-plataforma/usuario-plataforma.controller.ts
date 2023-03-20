@@ -15,10 +15,10 @@ import {
 import { UsuarioPlataformaService } from './usuario-plataforma.service';
 import { CreateUsuarioPlataformaDto } from './dto/create-usuario-plataforma.dto';
 import { UpdateUsuarioPlataformaDto } from './dto/update-usuario-plataforma.dto';
-import { CreateException } from 'src/common/filters/create-exceptions.filter';
-import { PatchException } from 'src/common/filters/patch-exceptions.filter';
-import { AuthenticatedGuard } from 'src/common/guards/authenticated.guard';
-import { AuthException } from 'src/common/filters/auth-exeptions.filters';
+import { CreateException } from 'src/commom/filters/create-exceptions.filter';
+import { PatchException } from 'src/commom/filters/patch-exceptions.filter';
+import { AuthenticatedGuard } from 'src/commom/guards/authenticated.guard';
+import { AuthException } from 'src/commom/filters/auth-exceptions.filters';
 
 @Controller('admin/usuarios')
 export class UsuarioPlataformaController {
@@ -30,8 +30,11 @@ export class UsuarioPlataformaController {
   @UseFilters(AuthException)
   @Get('index')
   @Render('usuarios/index')
-  async listarUsuarios() {
-    return { usuarios: await this.usuarioPlataformaService.findAll() };
+  async listarUsuarios(@Request() req) {
+    return {
+      usuarios: await this.usuarioPlataformaService.findAll(),
+      csrfToken: req.csrfToken(),
+    };
   }
 
   @UseGuards(AuthenticatedGuard)
@@ -43,13 +46,13 @@ export class UsuarioPlataformaController {
       message: req.flash('message'),
       oldData: req.flash('oldData'),
       alert: req.flash('alert'),
+      csrfToken: req.csrfToken(),
     };
   }
 
   @UseGuards(AuthenticatedGuard)
   @UseFilters(CreateException)
   @Post()
-  @UseFilters(CreateException)
   @Redirect('/admin/usuarios/index')
   create(@Body() createUsuarioPlataformaDto: CreateUsuarioPlataformaDto) {
     return this.usuarioPlataformaService.create(createUsuarioPlataformaDto);
@@ -66,6 +69,7 @@ export class UsuarioPlataformaController {
       message: req.flash('message'),
       oldData: req.flash('oldData'),
       alert: req.flash('alert'),
+      csrfToken: req.csrfToken(),
     };
   }
 

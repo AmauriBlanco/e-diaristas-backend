@@ -9,7 +9,7 @@ import { Response } from 'express';
 import { Utils } from 'src/utils/utils';
 
 @Catch(HttpException)
-export class CreateException implements ExceptionFilter {
+export class PatchException implements ExceptionFilter {
   constructor(private utils: Utils) {}
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
@@ -21,11 +21,11 @@ export class CreateException implements ExceptionFilter {
     if (exception instanceof BadRequestException) {
       request.flash(
         'message',
-        this.utils.formatExceptions(exception['response']['message']),
+        this.utils.formatException(exception['response']['message']),
       );
       request.flash('alert', 'alert alert-danger');
       request.flash('oldData', oldData);
-      response.redirect(`${url}/create`);
+      response.redirect(`${url}/edit`);
     } else {
       response.redirect(`${url}/index`);
     }

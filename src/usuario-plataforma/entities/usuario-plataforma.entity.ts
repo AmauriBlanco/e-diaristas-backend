@@ -15,7 +15,7 @@ export class UsuarioPlataforma {
   id: number;
 
   @Column()
-  name: string;
+  nome: string;
 
   @Column({ unique: true })
   email: string;

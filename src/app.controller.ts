@@ -3,18 +3,26 @@ import {
   Get,
   Post,
   Redirect,
-  Request,
   Render,
+  Request,
+  Res,
   UseFilters,
   UseGuards,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { AppService } from './app.service';
-import { AuthException } from './common/filters/auth-exeptions.filters';
-import { LoginGuard } from './common/guards/login.guard';
+import { AuthException } from './commom/filters/auth-exceptions.filters';
+import { LoginGuard } from './commom/guards/login.guard';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
+
+  @Get()
+  @Redirect('admin/login')
+  redirect() {
+    //redirect to login
+  }
 
   @Get('admin/login')
   @Render('login')
@@ -23,14 +31,34 @@ export class AppController {
       layout: false,
       loginError: req.flash('loginError'),
       class: req.flash('class'),
+      csrfToken: req.csrfToken(),
     };
   }
 
   @UseGuards(LoginGuard)
   @UseFilters(AuthException)
-  @Post('/admin/login')
+  @Post('admin/login')
   @Redirect('/admin/usuarios/index')
   doLogin() {
     //
+  }
+
+  @UseFilters(AuthException)
+  @Post('admin/logout')
+  logout(@Request() req, @Res() res: Response) {
+    req.session.destroy();
+    res.redirect('/admin/login');
+  }
+
+  @Get('admin/404')
+  @Render('404')
+  notFound() {
+    return { layout: false };
+  }
+
+  @Get('admin/500')
+  @Render('500')
+  errorServer() {
+    return { layout: false };
   }
 }

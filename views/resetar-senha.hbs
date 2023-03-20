@@ -1,0 +1,75 @@
+<html lang='pt-br'>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <meta name='csrf-token' content='#' />
+    <title>E-Diaristas</title>
+
+
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/css/adminlte.min.css">
+
+  </head>
+
+  <body class='login-page'>
+    <div class='login-box'>
+      <div class='login-logo'>
+        <a href='/home'>
+          <img src='/img/logo.png' height='50' />
+          <b>Resetar Senha</b>
+        </a>
+      </div>
+      <div class='card card-outline card-primary'>
+        <div class='card-header'>
+          <h3 class='card-title float-none text-center'>
+            Digite seu email para a recuperação de senha
+          </h3>
+        </div>
+        <div class='card-body login-card-body'>
+          <form action='/admin/password-reset' method='post'>
+          <input type="hidden" name="_csrf" value="{{csrfToken}}">
+            <div class='input-group mb-3'>
+              <input
+                type='email'
+                name='email'
+                class='form-control'
+                value='{{user_name}}'
+                placeholder='Email'
+                autofocus
+              />
+              <div class='input-group-append'>
+                <div class='input-group-text'>
+                  <span class='fas fa-envelope'></span>
+                </div>
+              </div>
+            </div>
+            <div class={{invalid}}><strong>{{message}}</strong></div>
+            <div><strong>{{messageEmail}}</strong></div>
+            <div class='row'>
+              <div class='col-12'>
+                  <button
+                    type='submit'
+                    class='btn btn-block btn-flat btn-primary'
+                    onClick="alert('Enviamos as instruções de reset de senha para o seu email cadastrado');"
+                  >
+                    <span class='fas fa-sign-in-alt'></span>
+                    Enviar
+                  </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src='jquery/jquery.min.js'></script>
+    <script src='js/bootstrap/bootstrap.bundle.min.js'></script>
+    <script
+      src='//cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js'
+    ></script>
+    <script src='js/adminlte/adminlte.min.js'></script>
+  </body>
+</html>

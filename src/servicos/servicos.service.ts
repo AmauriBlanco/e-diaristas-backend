@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Utils } from 'src/utils/utils';
 import { Repository } from 'typeorm';
 import { CreateServicoDto } from './dto/create-servico.dto';
 import { UpdateServicoDto } from './dto/update-servico.dto';
 import { Servico } from './entities/servico.entity';
+import { Utils } from 'src/utils/utils';
 
 @Injectable()
 export class ServicosService {
@@ -20,11 +20,11 @@ export class ServicosService {
     createServicoDto.valorCozinha = this.utils.formatDecimal(
       createServicoDto.valorCozinha,
     );
-    createServicoDto.valorOutros = this.utils.formatDecimal(
-      createServicoDto.valorOutros,
-    );
     createServicoDto.valorMinimo = this.utils.formatDecimal(
       createServicoDto.valorMinimo,
+    );
+    createServicoDto.valorOutros = this.utils.formatDecimal(
+      createServicoDto.valorOutros,
     );
     createServicoDto.valorQuarto = this.utils.formatDecimal(
       createServicoDto.valorQuarto,
@@ -53,11 +53,11 @@ export class ServicosService {
     updateServicoDto.valorCozinha = this.utils.formatDecimal(
       updateServicoDto.valorCozinha,
     );
-    updateServicoDto.valorOutros = this.utils.formatDecimal(
-      updateServicoDto.valorOutros,
-    );
     updateServicoDto.valorMinimo = this.utils.formatDecimal(
       updateServicoDto.valorMinimo,
+    );
+    updateServicoDto.valorOutros = this.utils.formatDecimal(
+      updateServicoDto.valorOutros,
     );
     updateServicoDto.valorQuarto = this.utils.formatDecimal(
       updateServicoDto.valorQuarto,

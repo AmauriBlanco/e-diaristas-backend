@@ -1,81 +1,57 @@
 <main>
-  <div class='content-header'>
-    <div class='container-fluid'>
+  <div class="content-header">
+    <div class="container-fluid">
       <h1>Editar Usuário</h1>
     </div>
   </div>
-  <div class='content'>
-    <div class='container-fluid'>
-      <form action='/admin/usuarios/{{usuario.id}}/edit?_method=PATCH' method='post'>
-        <div class='card'>
-          <div class='card-body'>
+  <div class="content">
+    <div class="container-fluid">
+      <form action="/admin/usuarios/{{usuario.id}}/edit?_method=PATCH" method="post">
+      <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+        <div class="card">
+          <div class="card-body">
             <fieldset>
-              <div class='row'>
-                <div class='col-lg-12'>
-                  <div class='col-lg-4'>
-                    <div class='{{alert}}'>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="col-lg-3">
+                    <div class="{{alert}}">
                       <p>{{{message}}}</p>
                     </div>
                   </div>
                 </div>
-                <div class='col-md-6'>
-                  <div class='form-group'>
-                    <label for='nome'>Nome</label>
-                    <input
-                      type='text'
-                      name='name'
-                      class='form-control'
-                      value='{{#if message}}{{oldData.0.name}}{{^}}{{usuario.name}}{{/if}}'
-                      placeholder='Nome do Usuário'
-                      
-                    />
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text"  value="{{#if message}}{{oldData.0.nome}}{{^}}{{usuario.nome}}{{/if}}" class="form-control" name="nome"
+                      placeholder="Nome do Usuário">
                   </div>
                 </div>
-                <div class='col-md-6'>
-                  <div class='form-group'>
-                    <label for='email'>Email</label>
-                    <input
-                      type='email'
-                      name='email'
-                      class='form-control'
-                      value='{{#if message}}{{oldData.0.email}}{{^}}{{usuario.email}}{{/if}}'
-                      placeholder='Email do usuário'
-                      
-                    />
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email"  value="{{#if message}}{{oldData.0.email}}{{^}}{{usuario.email}}{{/if}}" class="form-control" name="email"
+                      placeholder="Email do usuário">
                   </div>
                 </div>
-                <div class='col-md-6'>
-                  <div class='form-group'>
-                    <label for='password'>Senha</label>
-                    <input
-                      type='password'
-                      name='password'
-                      class='form-control'
-                      value=''
-                      placeholder='Senha do usuário'
-                      
-                    />
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password"  value="" class="form-control" name="password"
+                      placeholder="Senha">
                   </div>
                 </div>
-                <div class='col-md-6'>
-                  <div class='form-group'>
-                    <label for='passwordConfirmation'>Confirmação de Senha</label>
-                    <input
-                      type='password'
-                      name='passwordConfirmation'
-                      class='form-control'
-                      value=''
-                      placeholder='Confirme a senha'
-                      
-                    />
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="passwordConfirmation">Confirmação de Senha</label>
+                    <input type="password"  value="" class="form-control" name="passwordConfirmation"
+                      placeholder="Confirme a senha">
                   </div>
                 </div>
-              </div>
             </fieldset>
-            <div class='row'>
-              <div class='col-md-4'>
-                <div class='form-group'>
-                  <button class='btn btn-primary' type='submit'>Salvar</button>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <button class="btn btn-primary" type="submit">Salvar</button>
                 </div>
               </div>
             </div>

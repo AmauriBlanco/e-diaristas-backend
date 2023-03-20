@@ -1,49 +1,36 @@
-<div class='content-header'>
-  <div class='container-fluid'>
+<div class="content-header">
+  <div class="container-fluid">
     <h1>Lista de Usuários</h1>
   </div>
 </div>
-<div class='content'>
-  <div class='container-fluid'>
-    <table class='table'>
+<div class="content">
+  <div class="container-fluid">
+    <table class="table">
       <thead>
         <tr>
-          <th scope='col'>ID</th>
-          <th scope='col'>Nome</th>
-          <th scope='col'>E-mail</th>
-          <th scope='col'>Ações</th>
+          <th scope="col">ID</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
+          <th scope="col">Ações</th>
         </tr>
       </thead>
       <tbody>
-        {{#each usuarios}}
-          <tr>
-            <td>{{this.id}}</td>
-            <td>{{this.name}}</td>
-            <td>{{this.email}}</td>
-            <td>
-              <a
-                href='/admin/usuarios/{{this.id}}/edit'
-                class='btn btn-primary'
-              >Atualizar</a>
-              <form
-                action='/admin/usuarios/{{this.id}}?_method=DELETE'
-                method='post'
-                style='display: inline;'
-              >
-                <button
-                  href='/admin/usuarios/{{this.id}}'
-                  class='btn btn-danger'
-                  type='submit'
-                  onclick="return confirm('Tem certeza que deseja excluir esse usuário?')"
-                >Excluir</button>
-              </form>
-            </td>
-          </tr>
+       {{#each usuarios}}
+        <tr>
+          <th>{{this.id}}</th>
+          <td>{{this.nome}}</td>
+          <td>{{this.email}}</td>
+          <td><a href="/admin/usuarios/{{this.id}}/edit" class="btn btn-primary">Atualizar</a>
+          <form action="/admin/usuarios/{{this.id}}?_method=DELETE" method="post" style="display: inline;">
+          <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+            <button href="/admin/usuarios/{{thiis.id}}" type="submit" onclick="return confirm('Tem certeza que deseja excluir este usuário?')" class="btn btn-danger">Excluir</button>
+          </form></td>
+        </tr>
         {{/each}}
       </tbody>
     </table>
-    <div class='float-left'>
-      <a href='/admin/usuarios/create' class='btn btn-success'>Novo Usuário</a>
+    <div class="float-left">
+      <a href="/admin/usuarios/create" class="btn btn-success">Novo Usuário</a>
     </div>
   </div>
 </div>

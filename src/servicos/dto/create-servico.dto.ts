@@ -25,7 +25,7 @@ export class CreateServicoDto {
 
   @IsNumber({}, { message: 'Campo quantidade horas deve ser um número' })
   @Min(0, { message: 'Campo quantidade horas deve ser maior ou igual a 0' })
-  @Max(10, { message: 'Campo quantidade horas deve ser menor ou igual a 0' })
+  @Max(10, { message: 'Campo quantidade horas deve ser menor que 10' })
   @Type(() => Number)
   quantidadeHoras: number;
 
@@ -40,13 +40,13 @@ export class CreateServicoDto {
     { message: 'Campo valor quarto com formato inválido' },
   )
   @Matches(RegExp('^((?![-]).)*$'), {
-    message: 'Valor quarto não pode ser negativo',
+    message: 'campo valor quarto não pode ser negativo',
   })
   valorQuarto: number;
 
   @IsNumber({}, { message: 'Campo horas quarto deve ser um número' })
   @Min(0, { message: 'Campo horas quarto deve ser maior ou igual a 0' })
-  @Max(10, { message: 'Campo horas quarto deve ser maior ou igual a 10' })
+  @Max(10, { message: 'Campo quantidade horas deve ser menor ou igual a 0' })
   @Type(() => Number)
   horasQuarto: number;
 
@@ -55,10 +55,11 @@ export class CreateServicoDto {
     { message: 'Campo valor sala com formato inválido' },
   )
   @Matches(RegExp('^((?![-]).)*$'), {
-    message: 'Valor sala não pode ser negativo',
+    message: 'Campo valor sala não pode ser negativo',
   })
   valorSala: number;
 
+  @IsNotEmpty({ message: 'Campo horas sala não pode ser vazio' })
   @IsNumber({}, { message: 'Campo horas sala deve ser um número' })
   @Min(0, { message: 'Campo horas sala deve ser maior ou igual a 0' })
   @Max(10, { message: 'Campo horas sala deve ser menor ou igual a 10' })
@@ -70,7 +71,7 @@ export class CreateServicoDto {
     { message: 'Campo valor banheiro com formato inválido' },
   )
   @Matches(RegExp('^((?![-]).)*$'), {
-    message: 'Valor banheiro não pode ser negativo',
+    message: 'Campo valor banheiro não pode ser negativo',
   })
   valorBanheiro: number;
 
@@ -85,7 +86,7 @@ export class CreateServicoDto {
     { message: 'Campo valor cozinha com formato inválido' },
   )
   @Matches(RegExp('^((?![-]).)*$'), {
-    message: 'Valor cozinha não pode ser negativo',
+    message: 'Campo valor cozinha não pode ser negativo',
   })
   valorCozinha: number;
 
@@ -100,7 +101,7 @@ export class CreateServicoDto {
     { message: 'Campo valor quintal com formato inválido' },
   )
   @Matches(RegExp('^((?![-]).)*$'), {
-    message: 'Valor quintal não pode ser negativo',
+    message: 'Campo valor quintal não pode ser negativo',
   })
   valorQuintal: number;
 
@@ -115,21 +116,22 @@ export class CreateServicoDto {
     { message: 'Campo valor outros com formato inválido' },
   )
   @Matches(RegExp('^((?![-]).)*$'), {
-    message: 'Valor outros não pode ser negativo',
+    message: 'Campo valor outros não pode ser negativo',
   })
   valorOutros: number;
 
+  @IsNotEmpty({ message: 'Campo horas outros não pode ser vazio' })
   @IsNumber({}, { message: 'Campo horas outros deve ser um número' })
   @Min(0, { message: 'Campo horas outros deve ser maior ou igual a 0' })
   @Max(10, { message: 'Campo horas outros deve ser menor ou igual a 10' })
   @Type(() => Number)
   horasOutros: number;
 
-  @IsNotEmpty({ message: 'Campo ícone não pode ser vazio' })
+  @IsNotEmpty({ message: 'Campo icone não pode ser vazio' })
   icone: string;
 
   @IsNumber({}, { message: 'Campo posição deve ser um número' })
-  @Min(1, { message: 'Campo posição deve ser menor ou igual a 1' })
+  @Min(1, { message: 'Campo posição horas deve ser maior ou igual a 1' })
   @Type(() => Number)
   posicao: number;
 }
