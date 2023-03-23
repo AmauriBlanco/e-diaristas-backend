@@ -9,7 +9,7 @@ async function bootstrap() {
   await app.select(CommandModule).get(CommandService).exec();
   setTimeout(() => {
     app.close();
-  }, 500);
+  }, 1000);
 }
 
 bootstrap();
