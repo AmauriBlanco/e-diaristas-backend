@@ -23,7 +23,8 @@
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "typeorm:migrate": "cross-var npm run typeorm -- -d ./src/database/migrations-config.ts migration:generate ./src/database/migrations/postgres/$npm_config_name",
     "typeorm:run": "npm run typeorm -- -d ./src/database/migrations-config.ts migration:run",
-    "typeorm:revert": "npm run typeorm -- -d ./src/database/migrations-config.ts migration:revert"
+    "typeorm:revert": "npm run typeorm -- -d ./src/database/migrations-config.ts migration:revert",
+    "typeorm:log": "npm run typeorm -- -d ./src/databse/migrations-config.ts schema:log"
   },
   "dependencies": {
     "@nestjs-modules/mailer": "^1.8.1",
@@ -56,7 +57,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "typeorm": "^0.3.12",
+    "typeorm": "0.3.11",
     "typeorm-naming-strategies": "^4.1.0"
   },
   "devDependencies": {
